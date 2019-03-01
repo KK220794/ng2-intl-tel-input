@@ -1,0 +1,78 @@
+
+
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+        <div class="iti-flag" [ngClass]="selectedCountry.flagClass"></div>
+         <span><mat-icon>arrow_drop_down</mat-icon></span>
+    </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let country of allCountries"  (click)="onCountrySelect(country, focusable)" >
+                <div class="iti-flag" [ngClass]="country.flagClass"></div>
+          <span>{{country.name}}</span>
+          <span>+{{country.dialCode}}</span>
+        </button>
+      </mat-menu> -->
+
+        <!-- <div class="iti-flag" [ngClass]="selectedCountry.flagClass"></div>
+        <div class="iti-arrow"></div> -->
+        <div *ngIf="!bootstrap" style="margin: 50px">
+        <form [formGroup]="form2" >
+        <button mat-icon-button>
+            <div class="iti-flag" [ngClass]="selectedCountry.flagClass"></div>
+        <mat-select>
+          <mat-option *ngFor="let country of allCountries"
+          (click)="onCountrySelect(country, focusable)" >
+              <div class="flag-box">
+                <div class="iti-flag" [ngClass]="country.flagClass"></div></div>
+
+              <span class="country-name">{{country.name}}</span>
+              <span class="dial-code">+{{country.dialCode}}</span>
+          </mat-option>
+        </mat-select></button>
+        <mat-form-field appearance="outline" [ngStyle]="{'font-size.px': 12}" >
+    <mat-label>Phone Number</mat-label>
+    <input id="phone" autocomplete="off" matInput
+    [ngClass]="cssClass"
+    (blur)="onTouched()"
+    (keypress)="onInputKeyPress($event)"
+    formControlName="phoneNo"
+    (ngModelChange)="onPhoneNumberChange()"
+    [placeholder]="selectedCountry.placeHolder" #focusable>
+  </mat-form-field>
+</form>
+</div>
+
+<div *ngIf="bootstrap" style="margin: 50px">
+  <div class="intl-tel-input allow-dropdown">
+    <div class="flag-container" dropdown [ngClass]="{'disabled': disabled}">
+      <div class="selected-flag dropdown-toggle" dropdownToggle>
+        <div class="iti-flag" [ngClass]="selectedCountry.flagClass"></div>
+        <!-- <div class="iti-arrow"></div> -->
+      </div>
+      <ul class="country-list dropdown-menu" *dropdownMenu>
+        <li class="country" *ngFor="let country of preferredCountriesInDropDown" (click)="onCountrySelect(country, focusable)">
+          <div class="flag-box">
+            <div class="iti-flag" [ngClass]="country.flagClass"></div>
+          </div>
+          <span class="country-name">{{country.name}}</span>
+          <span class="dial-code">+{{country.dialCode}}</span>
+        </li>
+        <li class="divider" *ngIf="preferredCountriesInDropDown?.length"></li>
+        <li class="country" *ngFor="let country of allCountries" (click)="onCountrySelect(country, focusable)">
+          <div class="flag-box">
+            <div class="iti-flag" [ngClass]="country.flagClass"></div>
+          </div>
+          <span class="country-name">{{country.name}}</span>
+          <span class="dial-code">+{{country.dialCode}}</span>
+        </li>
+      </ul>
+    </div>
+    <input type="tel" id="phone" autocomplete="off"
+          [ngClass]="cssClass"
+          (blur)="onTouched()"
+          (keypress)="onInputKeyPress($event)"
+          [(ngModel)]="phoneNumber"
+          (ngModelChange)="onPhoneNumberChange()"
+          [disabled]="disabled"
+          [placeholder]="selectedCountry.placeHolder" #focusable>
+  </div>
+</div>
